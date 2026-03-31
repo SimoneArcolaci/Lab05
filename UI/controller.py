@@ -1,5 +1,5 @@
 import flet as ft
-
+from model.corso import *
 
 class Controller:
     def __init__(self, view, model):
@@ -17,3 +17,22 @@ class Controller:
             return
         self._view.txt_result.controls.append(ft.Text(f"Hello, {name}!"))
         self._view.update_page()
+    def CercaIscritti(self,e):
+        pass
+    def CercaStudente(self,e):
+        pass
+    def CercaCorsi(self,e):
+        pass
+    def Iscrivi(self,e):
+        pass
+    def aggiungiCorsiAView(self):
+        self._model.caricaCorsi()
+        self._view.txtCorso.options.clear()
+        listaCorsi = self._model.popolaCorsi
+        for i in listaCorsi:
+            opzione =ft.dropdown.Option(key=i.codins, text=i.__str__())
+            self._view.txtCorso.options.append(opzione)
+
+        self._view.update_page()
+
+
