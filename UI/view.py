@@ -28,8 +28,8 @@ class View(ft.UserControl):
         self.btnCI = ft.ElevatedButton(text="Cerca Iscritti", on_click=self._controller.CercaIscritti)
         #Row 3:
         self.txtMatricola = ft.TextField(label="Matricola")
-        self.txtName = ft.TextField(label="Nome", disabled=True)
-        self.txtCognome = ft.TextField(label="Cognome", disabled=True)
+        self.txtName = ft.TextField(label="Nome", read_only=True)
+        self.txtCognome = ft.TextField(label="Cognome", read_only=True)
         #Row 4:
         self.btnCS = ft.ElevatedButton(text="Cerca Studente", on_click=self._controller.CercaStudente)
         self.btnCC = ft.ElevatedButton(text="Cerca Corsi", on_click=self._controller.CercaCorsi)

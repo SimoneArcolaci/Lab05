@@ -18,6 +18,23 @@ class Model:
     def caricaCorsi(self):
         self._listaCorsi = self._DAOC.get_corsi()
     def caricaStudenti(self):
-        pass
+        self._listaStudenti = self._DAOS.get_studenti()
+
+    def cercaStudentiPerCorso(self, corso):
+        matricole = self._DAOC.get_iscritti_a_corso(corso)
+        listaRisultati = []
+        for m in matricole:
+            for studente in self._listaStudenti:
+                if m == studente.matricola:
+                    listaRisultati.append(studente)
+
+        return listaRisultati
+
+    def cercaStudentiPerMatricola(self, matricola):
+        for i in self._listaStudenti:
+            # Usiamo str() per assicurarci che siano dello stesso tipo!
+            if str(matricola) == str(i.matricola):
+                return i
+        return None  # Aggiungiamo un return esplicito per chiarezza
 
 

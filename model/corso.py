@@ -5,4 +5,4 @@ class Corso:
         self.crediti = crediti
         self.pd = pd
     def __str__(self):
-        return f'{self.nomeCorso}'
+        return f'{self.nomeCorso} ({self.codins})'

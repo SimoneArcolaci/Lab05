@@ -17,3 +17,16 @@ class corso_DAO:
         cnx.close()
 
         return listaCorsi
+
+    def get_iscritti_a_corso(self, c):
+        cnx = DBConnect.get_connection()
+        cursor = cnx.cursor(dictionary=True)
+        query = """SELECT matricola FROM iscrizione where codins = %s"""
+        listaIscriti = []
+        cursor.execute(query, (c,))
+        for row in cursor:
+            s = row["matricola"]
+            listaIscriti.append(s)
+        cnx.close()
+        cursor.close()
+        return listaIscriti
