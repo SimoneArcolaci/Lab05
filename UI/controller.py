@@ -24,8 +24,7 @@ class Controller:
              return
          studente = self._model.cercaStudentiPerMatricola(matricola)
          if studente is None:
-             # Ti avvisa invece di bloccarsi in silenzio
-             self._view.create_alert("Studente non trovato nel database!")
+             self.erroreMatricola()
              return
          nome = studente.nome
          cognome = studente.cognome
@@ -149,5 +148,8 @@ class Controller:
         self._view._page.dialog = errDatoNonTrovato
         self._view._page.update()
 
-
+    def provaAlert(self,e):
+        self._view.create_alert("Svegliati l'acido")
+        self._view.update_page()
+        return
 

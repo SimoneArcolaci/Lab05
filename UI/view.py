@@ -8,7 +8,7 @@ class View(ft.UserControl):
         self._page = page
         self._page.title = "Lab O5 - segreteria studenti"
         self._page.horizontal_alignment = 'CENTER'
-        self._page.theme_mode = ft.ThemeMode.LIGHT
+        self._page.theme_mode = ft.ThemeMode.DARK
         # controller (it is not initialized. Must be initialized in the main, after the controller is created)
         self._controller = None
         # graphical elements
@@ -34,6 +34,7 @@ class View(ft.UserControl):
         self.btnCS = ft.ElevatedButton(text="Cerca Studente", on_click=self._controller.CercaStudente)
         self.btnCC = ft.ElevatedButton(text="Cerca Corsi", on_click=self._controller.CercaCorsi)
         self.btnIscrivi = ft.ElevatedButton(text="Iscrivi", on_click=self._controller.Iscrivi)
+        self.btnSA = ft.ElevatedButton(text="Premi per svegliare acido", on_click=self._controller.provaAlert)
 
 
         self.lvOut = ft.ListView(expand=True)
@@ -41,7 +42,7 @@ class View(ft.UserControl):
         self.row1 = ft.Row(controls=[self.titolo], alignment="CENTER")
         self.row2 = ft.Row(controls=[self.txtCorso, self.btnCI], alignment="CENTER")
         self.row3 = ft.Row(controls=[self.txtMatricola, self.txtName, self.txtCognome], alignment="CENTER")
-        self.row4 = ft.Row(controls=[self.btnCS, self.btnCC, self.btnIscrivi], alignment="CENTER")
+        self.row4 = ft.Row(controls=[self.btnCS, self.btnCC, self.btnIscrivi, self.btnSA], alignment="CENTER")
         self._controller.aggiungiCorsiAView()
 
         self._page.add(self.row1, self.row2, self.row3, self.row4, self.lvOut)
