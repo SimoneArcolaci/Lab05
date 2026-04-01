@@ -34,10 +34,54 @@ class Controller:
          self._view.update_page()
 
 
+
+
     def CercaCorsi(self,e):
-        pass
+        matricola = self._view.txtMatricola.value
+        listaCorsi = self._model.cercaCorsiPerMatricola(matricola)
+        self._view.lvOut.controls.clear()
+        print(listaCorsi)
+        if matricola is None or matricola == "":
+            self.erroreMatricola()
+            return
+        if len(listaCorsi) == 0:
+            self.erroreMatricola()
+            return
+        for i in listaCorsi:
+            self._view.lvOut.controls.append(ft.Text(value=f"{i.nomeCorso} - {i.codins}"))
+        self._view.update_page()
+        return
+
+
+
+
+
+
     def Iscrivi(self,e):
-        pass
+        codins = self._view.txtCorso.value
+        matricola = self._view.txtMatricola.value
+        codins = self._model.esistenzaCorso(codins)
+        matricola = self._model.esistenzaStudenti(matricola)
+        if codins is False or matricola is False:
+            self.erroreDatiNonTrovati()
+            return
+        self._model.caricaIscrizioni()
+        listaIscrizioni = self._model.getIscrizioni
+        for i in listaIscrizioni:
+            if str(i["matricola"]) == str(matricola) and str(i["codins"]) == str(codins):
+                print("La relazione è già presente")
+                return
+        self._model.aggiungiIscrizione(matricola, codins)
+
+
+
+
+
+
+
+
+
+
     def aggiungiCorsiAView(self):
         self._model.caricaCorsi()
         self._model.caricaStudenti()
@@ -78,6 +122,7 @@ class Controller:
         self._view._page.dialog = errCorsoNonSelezionato
         self._view._page.update()
 
+
     def erroreMatricola(self):
         def chiudi_errore(e):
             errMatricolaInesistente.open = False
@@ -90,4 +135,19 @@ class Controller:
         )
         self._view._page.dialog = errMatricolaInesistente
         self._view._page.update()
+
+    def erroreDatiNonTrovati(self):
+        def chiudi_errore(e):
+            errDatoNonTrovato.open = False
+            self._view._page.update()
+        errDatoNonTrovato = ft.AlertDialog(
+            title=ft.Text(value="Errore di Ricerca"),
+            content=ft.Text(value="I Dati richiesti non sono presenti nel database"),
+            actions=[ft.TextButton("Chiudi", on_click=chiudi_errore)],
+            open=True,
+        )
+        self._view._page.dialog = errDatoNonTrovato
+        self._view._page.update()
+
+
 

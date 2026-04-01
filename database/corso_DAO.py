@@ -30,3 +30,24 @@ class corso_DAO:
         cnx.close()
         cursor.close()
         return listaIscriti
+    def get_Iscrizioni(self):
+        cnx = DBConnect.get_connection()
+        cursor = cnx.cursor(dictionary=True)
+        query = """SELECT * FROM iscrizione """
+        cursor.execute(query)
+        listaIscritti = []
+        for row in cursor:
+            listaIscritti.append(row)
+        cnx.close()
+        cursor.close()
+        return listaIscritti
+
+    def addIscrizione(self, matricola, codins):
+        cnx = DBConnect.get_connection()
+        cursor = cnx.cursor()
+        valori = (codins, matricola)
+        query = """Insert into iscrizione (codins, matricola) values (%s, %s)"""
+        cursor.execute(query, valori)
+        cnx.commit()
+        cursor.close()
+        cnx.close()
